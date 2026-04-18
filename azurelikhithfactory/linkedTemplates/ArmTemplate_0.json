@@ -1,0 +1,787 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "azurelikhithfactory"
+		},
+		"ADLS_Linked_Service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADLS_Linked_Service'"
+		},
+		"AzureLikhithSQLDBConnection_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureLikhithSQLDBConnection'"
+		},
+		"AzureSqlDatabase_Linkedservice_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Linkedservice'"
+		},
+		"Azure_Blob_Linked_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Azure_Blob_Linked'"
+		},
+		"Azure_SQLDB_CDC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQLDB_CDC'"
+		},
+		"Azure_SQLDB_LinkedService_CDC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQLDB_LinkedService_CDC'"
+		},
+		"Azure_SQLDB_Linked_Service_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQLDB_Linked_Service'"
+		},
+		"DBCDC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DBCDC'"
+		},
+		"DBCDC1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DBCDC1'"
+		},
+		"source_linked_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'source_linked'"
+		},
+		"sqldatabase_linkedset_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sqldatabase_linkedset'"
+		},
+		"sqldb_linkedset_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sqldb_linkedset'"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"DBCDC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"DBCDC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"DBCDC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"DBCDC1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"DBCDC1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"DBCDC1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"sqldb_linked_set_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"sqldb_linked_set_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"sqldb_linkedset_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "tcp:azurelikhith.database.windows.net,1433"
+		},
+		"sqldb_linkedset_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"sqldb_linkedset_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "live.com#likhitendra.gaddipati@gmail.com"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_Linked_Service')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ADLS_Linked_Service_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureLikhithSQLDBConnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureLikhithSQLDBConnection_properties_typeProperties_server')]",
+					"database": "[parameters('AzureLikhithSQLDBConnection_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AzureLikhithSQLDBConnection_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AzureLikhithSQLDBConnection_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_Linkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlDatabase_Linkedservice_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlDatabase_Linkedservice_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AzureSqlDatabase_Linkedservice_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase_Linkedservice_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_Blob_Linked')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('Azure_Blob_Linked_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_SQLDB_CDC')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('Azure_SQLDB_CDC_properties_typeProperties_server')]",
+					"database": "[parameters('Azure_SQLDB_CDC_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('Azure_SQLDB_CDC_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Azure_SQLDB_CDC_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_SQLDB_LinkedService_CDC')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('Azure_SQLDB_LinkedService_CDC_properties_typeProperties_server')]",
+					"database": "[parameters('Azure_SQLDB_LinkedService_CDC_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('Azure_SQLDB_LinkedService_CDC_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Azure_SQLDB_LinkedService_CDC_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_SQLDB_Linked_Service')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('Azure_SQLDB_Linked_Service_properties_typeProperties_server')]",
+					"database": "[parameters('Azure_SQLDB_Linked_Service_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('Azure_SQLDB_Linked_Service_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Azure_SQLDB_Linked_Service_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DBCDC')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('DBCDC_properties_typeProperties_server')]",
+					"database": "[parameters('DBCDC_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('DBCDC_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DBCDC_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DBCDC1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('DBCDC1_properties_typeProperties_server')]",
+					"database": "[parameters('DBCDC1_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('DBCDC1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DBCDC1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source_linked')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('source_linked_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sqldatabase_linkedset')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('sqldatabase_linkedset_properties_typeProperties_server')]",
+					"database": "[parameters('sqldatabase_linkedset_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('sqldatabase_linkedset_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('sqldatabase_linkedset_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sqldb_linked_set')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('sqldb_linked_set_properties_typeProperties_server')]",
+					"database": "[parameters('sqldb_linked_set_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SystemAssignedManagedIdentity"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sqldb_linkedset')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('sqldb_linkedset_properties_typeProperties_server')]",
+					"database": "[parameters('sqldb_linkedset_properties_typeProperties_database')]",
+					"encrypt": "True",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('sqldb_linkedset_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('sqldb_linkedset_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSQLTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Azure_SQLDB_CDC",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Fruit_Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UnitPrice",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Fruits"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Azure_SQLDB_CDC')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Azure_SQLDB_Linked_Service",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "StudentID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "StudentName",
+						"type": "varchar"
+					},
+					{
+						"name": "Age",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Students"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Azure_SQLDB_Linked_Service')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Azure_SQLDB_CDC",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Fruit_Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UnitPrice",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TotalPrice",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Fruits"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Azure_SQLDB_CDC')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Azure_SQLDB_CDC",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ProductID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ProductName",
+						"type": "varchar"
+					},
+					{
+						"name": "Price",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Currency",
+						"type": "varchar"
+					},
+					{
+						"name": "Availability_Status",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Products"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Azure_SQLDB_CDC')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Azure_SQLDB_CDC",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ProductID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ProductName",
+						"type": "varchar"
+					},
+					{
+						"name": "Price",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Currency",
+						"type": "varchar"
+					},
+					{
+						"name": "Availability_Status",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Products_Copy"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Azure_SQLDB_CDC')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_SQL_Table')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Azure_SQLDB_CDC",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "index_no",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Brand",
+						"type": "varchar"
+					},
+					{
+						"name": "Category",
+						"type": "varchar"
+					},
+					{
+						"name": "Price",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Curreny",
+						"type": "varchar"
+					},
+					{
+						"name": "Stock",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EAN",
+						"type": "varchar"
+					},
+					{
+						"name": "Color",
+						"type": "varchar"
+					},
+					{
+						"name": "Size",
+						"type": "varchar"
+					},
+					{
+						"name": "Availability",
+						"type": "varchar"
+					},
+					{
+						"name": "Internal_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "products_table"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Azure_SQLDB_CDC')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BatchCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_Linked_Service",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "organizations",
+						"container": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Index",
+						"type": "String"
+					},
+					{
+						"name": "OrganizationId",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Website",
+						"type": "String"
+					},
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "Founded",
+						"type": "String"
+					},
+					{
+						"name": "Industry",
+						"type": "String"
+					},
+					{
+						"name": "NoOfEmployees",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_Linked_Service')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,144 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "azurelikhithfactory"
+		},
+		"ADLS_Linked_Service_connectionString": {
+			"value": ""
+		},
+		"AzureLikhithSQLDBConnection_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase_Linkedservice_password": {
+			"value": ""
+		},
+		"Azure_Blob_Linked_connectionString": {
+			"value": ""
+		},
+		"Azure_SQLDB_CDC_password": {
+			"value": ""
+		},
+		"Azure_SQLDB_LinkedService_CDC_password": {
+			"value": ""
+		},
+		"Azure_SQLDB_Linked_Service_password": {
+			"value": ""
+		},
+		"DBCDC_password": {
+			"value": ""
+		},
+		"DBCDC1_password": {
+			"value": ""
+		},
+		"source_linked_connectionString": {
+			"value": ""
+		},
+		"sqldatabase_linkedset_password": {
+			"value": ""
+		},
+		"sqldb_linkedset_password": {
+			"value": ""
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"DBCDC_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"DBCDC_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"DBCDC_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"DBCDC1_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"DBCDC1_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"DBCDC1_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_userName": {
+			"value": "CloudSA215d069d"
+		},
+		"sqldb_linked_set_properties_typeProperties_server": {
+			"value": "azurelikhith.database.windows.net"
+		},
+		"sqldb_linked_set_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"sqldb_linkedset_properties_typeProperties_server": {
+			"value": "tcp:azurelikhith.database.windows.net,1433"
+		},
+		"sqldb_linkedset_properties_typeProperties_database": {
+			"value": "azurelikhithsqldb"
+		},
+		"sqldb_linkedset_properties_typeProperties_userName": {
+			"value": "live.com#likhitendra.gaddipati@gmail.com"
+		},
+		"File_Created_Trigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/12123c71-7bb7-415d-b767-a1a507ab272f/resourceGroups/Azure_DE/providers/Microsoft.Storage/storageAccounts/likhithazurestorage"
+		},
+		"trigger_source_properties_typeProperties_scope": {
+			"value": "/subscriptions/12123c71-7bb7-415d-b767-a1a507ab272f/resourceGroups/Azure_DE/providers/Microsoft.Storage/storageAccounts/likhithazurestorage"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

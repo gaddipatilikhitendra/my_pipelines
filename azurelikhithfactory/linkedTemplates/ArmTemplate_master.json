@@ -1,0 +1,403 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "azurelikhithfactory"
+		},
+		"ADLS_Linked_Service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADLS_Linked_Service'"
+		},
+		"AzureLikhithSQLDBConnection_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureLikhithSQLDBConnection'"
+		},
+		"AzureSqlDatabase_Linkedservice_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase_Linkedservice'"
+		},
+		"Azure_Blob_Linked_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Azure_Blob_Linked'"
+		},
+		"Azure_SQLDB_CDC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQLDB_CDC'"
+		},
+		"Azure_SQLDB_LinkedService_CDC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQLDB_LinkedService_CDC'"
+		},
+		"Azure_SQLDB_Linked_Service_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQLDB_Linked_Service'"
+		},
+		"DBCDC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DBCDC'"
+		},
+		"DBCDC1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DBCDC1'"
+		},
+		"source_linked_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'source_linked'"
+		},
+		"sqldatabase_linkedset_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sqldatabase_linkedset'"
+		},
+		"sqldb_linkedset_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sqldb_linkedset'"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"AzureLikhithSQLDBConnection_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"AzureSqlDatabase_Linkedservice_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_CDC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"Azure_SQLDB_Linked_Service_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"DBCDC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"DBCDC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"DBCDC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"DBCDC1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"DBCDC1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"DBCDC1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"sqldatabase_linkedset_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "CloudSA215d069d"
+		},
+		"sqldb_linked_set_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azurelikhith.database.windows.net"
+		},
+		"sqldb_linked_set_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"sqldb_linkedset_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "tcp:azurelikhith.database.windows.net,1433"
+		},
+		"sqldb_linkedset_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azurelikhithsqldb"
+		},
+		"sqldb_linkedset_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "live.com#likhitendra.gaddipati@gmail.com"
+		},
+		"File_Created_Trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/12123c71-7bb7-415d-b767-a1a507ab272f/resourceGroups/Azure_DE/providers/Microsoft.Storage/storageAccounts/likhithazurestorage"
+		},
+		"trigger_source_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/12123c71-7bb7-415d-b767-a1a507ab272f/resourceGroups/Azure_DE/providers/Microsoft.Storage/storageAccounts/likhithazurestorage"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "azurelikhithfactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADLS_Linked_Service_connectionString": {
+						"value": "[parameters('ADLS_Linked_Service_connectionString')]"
+					},
+					"AzureLikhithSQLDBConnection_password": {
+						"value": "[parameters('AzureLikhithSQLDBConnection_password')]"
+					},
+					"AzureSqlDatabase_Linkedservice_password": {
+						"value": "[parameters('AzureSqlDatabase_Linkedservice_password')]"
+					},
+					"Azure_Blob_Linked_connectionString": {
+						"value": "[parameters('Azure_Blob_Linked_connectionString')]"
+					},
+					"Azure_SQLDB_CDC_password": {
+						"value": "[parameters('Azure_SQLDB_CDC_password')]"
+					},
+					"Azure_SQLDB_LinkedService_CDC_password": {
+						"value": "[parameters('Azure_SQLDB_LinkedService_CDC_password')]"
+					},
+					"Azure_SQLDB_Linked_Service_password": {
+						"value": "[parameters('Azure_SQLDB_Linked_Service_password')]"
+					},
+					"DBCDC_password": {
+						"value": "[parameters('DBCDC_password')]"
+					},
+					"DBCDC1_password": {
+						"value": "[parameters('DBCDC1_password')]"
+					},
+					"source_linked_connectionString": {
+						"value": "[parameters('source_linked_connectionString')]"
+					},
+					"sqldatabase_linkedset_password": {
+						"value": "[parameters('sqldatabase_linkedset_password')]"
+					},
+					"sqldb_linkedset_password": {
+						"value": "[parameters('sqldb_linkedset_password')]"
+					},
+					"AzureLikhithSQLDBConnection_properties_typeProperties_server": {
+						"value": "[parameters('AzureLikhithSQLDBConnection_properties_typeProperties_server')]"
+					},
+					"AzureLikhithSQLDBConnection_properties_typeProperties_database": {
+						"value": "[parameters('AzureLikhithSQLDBConnection_properties_typeProperties_database')]"
+					},
+					"AzureLikhithSQLDBConnection_properties_typeProperties_userName": {
+						"value": "[parameters('AzureLikhithSQLDBConnection_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase_Linkedservice_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase_Linkedservice_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase_Linkedservice_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase_Linkedservice_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase_Linkedservice_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase_Linkedservice_properties_typeProperties_userName')]"
+					},
+					"Azure_SQLDB_CDC_properties_typeProperties_server": {
+						"value": "[parameters('Azure_SQLDB_CDC_properties_typeProperties_server')]"
+					},
+					"Azure_SQLDB_CDC_properties_typeProperties_database": {
+						"value": "[parameters('Azure_SQLDB_CDC_properties_typeProperties_database')]"
+					},
+					"Azure_SQLDB_CDC_properties_typeProperties_userName": {
+						"value": "[parameters('Azure_SQLDB_CDC_properties_typeProperties_userName')]"
+					},
+					"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_server": {
+						"value": "[parameters('Azure_SQLDB_LinkedService_CDC_properties_typeProperties_server')]"
+					},
+					"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_database": {
+						"value": "[parameters('Azure_SQLDB_LinkedService_CDC_properties_typeProperties_database')]"
+					},
+					"Azure_SQLDB_LinkedService_CDC_properties_typeProperties_userName": {
+						"value": "[parameters('Azure_SQLDB_LinkedService_CDC_properties_typeProperties_userName')]"
+					},
+					"Azure_SQLDB_Linked_Service_properties_typeProperties_server": {
+						"value": "[parameters('Azure_SQLDB_Linked_Service_properties_typeProperties_server')]"
+					},
+					"Azure_SQLDB_Linked_Service_properties_typeProperties_database": {
+						"value": "[parameters('Azure_SQLDB_Linked_Service_properties_typeProperties_database')]"
+					},
+					"Azure_SQLDB_Linked_Service_properties_typeProperties_userName": {
+						"value": "[parameters('Azure_SQLDB_Linked_Service_properties_typeProperties_userName')]"
+					},
+					"DBCDC_properties_typeProperties_server": {
+						"value": "[parameters('DBCDC_properties_typeProperties_server')]"
+					},
+					"DBCDC_properties_typeProperties_database": {
+						"value": "[parameters('DBCDC_properties_typeProperties_database')]"
+					},
+					"DBCDC_properties_typeProperties_userName": {
+						"value": "[parameters('DBCDC_properties_typeProperties_userName')]"
+					},
+					"DBCDC1_properties_typeProperties_server": {
+						"value": "[parameters('DBCDC1_properties_typeProperties_server')]"
+					},
+					"DBCDC1_properties_typeProperties_database": {
+						"value": "[parameters('DBCDC1_properties_typeProperties_database')]"
+					},
+					"DBCDC1_properties_typeProperties_userName": {
+						"value": "[parameters('DBCDC1_properties_typeProperties_userName')]"
+					},
+					"sqldatabase_linkedset_properties_typeProperties_server": {
+						"value": "[parameters('sqldatabase_linkedset_properties_typeProperties_server')]"
+					},
+					"sqldatabase_linkedset_properties_typeProperties_database": {
+						"value": "[parameters('sqldatabase_linkedset_properties_typeProperties_database')]"
+					},
+					"sqldatabase_linkedset_properties_typeProperties_userName": {
+						"value": "[parameters('sqldatabase_linkedset_properties_typeProperties_userName')]"
+					},
+					"sqldb_linked_set_properties_typeProperties_server": {
+						"value": "[parameters('sqldb_linked_set_properties_typeProperties_server')]"
+					},
+					"sqldb_linked_set_properties_typeProperties_database": {
+						"value": "[parameters('sqldb_linked_set_properties_typeProperties_database')]"
+					},
+					"sqldb_linkedset_properties_typeProperties_server": {
+						"value": "[parameters('sqldb_linkedset_properties_typeProperties_server')]"
+					},
+					"sqldb_linkedset_properties_typeProperties_database": {
+						"value": "[parameters('sqldb_linkedset_properties_typeProperties_database')]"
+					},
+					"sqldb_linkedset_properties_typeProperties_userName": {
+						"value": "[parameters('sqldb_linkedset_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "azurelikhithfactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'azurelikhithfactory_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "azurelikhithfactory_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'azurelikhithfactory_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "azurelikhithfactory_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"File_Created_Trigger_properties_typeProperties_scope": {
+						"value": "[parameters('File_Created_Trigger_properties_typeProperties_scope')]"
+					},
+					"trigger_source_properties_typeProperties_scope": {
+						"value": "[parameters('trigger_source_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'azurelikhithfactory_ArmTemplate_2')]"
+			]
+		}
+	]
+}
