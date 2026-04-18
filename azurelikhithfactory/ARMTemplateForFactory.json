@@ -380,8 +380,12 @@
 												"type": "Int32"
 											},
 											"err": {
-												"value": "'Hello'",
+												"value": null,
 												"type": "String"
+											},
+											"err_code": {
+												"value": null,
+												"type": "Int32"
 											},
 											"filename": {
 												"value": {
@@ -431,8 +435,18 @@
 												"type": "Int32"
 											},
 											"err": {
-												"value": "\"Failed_Error\"",
+												"value": {
+													"value": "@activity('CopyDataToParquet').output.errors[0].Message",
+													"type": "Expression"
+												},
 												"type": "String"
+											},
+											"err_code": {
+												"value": {
+													"value": "@activity('CopyDataToParquet').output.errors[0].Code",
+													"type": "Expression"
+												},
+												"type": "Int32"
 											},
 											"filename": {
 												"value": {
