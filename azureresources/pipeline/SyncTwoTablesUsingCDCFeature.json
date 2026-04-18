@@ -1,0 +1,37 @@
+{
+	"name": "SyncTwoTablesUsingCDCFeature",
+	"properties": {
+		"activities": [
+			{
+				"name": "CallCDCDataflow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "CDC_Dataflow",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 16,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine",
+					"continuationSettings": {
+						"customizedCheckpointKey": "b7463502-248f-4cdf-b4ae-d4d0204d6ce0"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-04-11T16:11:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

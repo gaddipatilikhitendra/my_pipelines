@@ -1,0 +1,9 @@
+{
+	"name": "azurelikhithfactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d4c30df7-425d-43ff-9f58-27c50c28e9dd",
+		"tenantId": "6e48cb09-096a-4a6f-9b42-653d5dd82cd8"
+	}
+}

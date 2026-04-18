@@ -1,0 +1,86 @@
+{
+	"name": "ColumnSplitTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Sourcetxt",
+						"type": "DatasetReference"
+					},
+					"name": "Sourcetxt"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable3",
+						"type": "DatasetReference"
+					},
+					"name": "TableSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1",
+					"description": "Splitting the Column1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Column_1 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Sourcetxt",
+				"Sourcetxt derive(Split1 = split(Column_1,':')) ~> derivedColumn1",
+				"derivedColumn1 derive(Split2 = split(Split1[2],';')) ~> derivedColumn2",
+				"derivedColumn2 derive(Name = Split2[1],",
+				"          Quantity = Split2[2],",
+				"          UnitPrice = Split2[3],",
+				"          TotalPrice = multiply(toInteger(Split2[2]),toInteger(Split2[3]))) ~> derivedColumn3",
+				"derivedColumn3 select(mapColumn(",
+				"          Name,",
+				"          Quantity,",
+				"          UnitPrice,",
+				"          TotalPrice",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Fruit_Name as string,",
+				"          Quantity as integer,",
+				"          UnitPrice as integer,",
+				"          TotalPrice as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     preSQLs:[(\"truncate table Fruits\")],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Fruit_Name = Name,",
+				"          Quantity,",
+				"          UnitPrice,",
+				"          TotalPrice",
+				"     )) ~> TableSink"
+			]
+		}
+	}
+}

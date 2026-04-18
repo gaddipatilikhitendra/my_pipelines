@@ -1,0 +1,37 @@
+{
+	"name": "AzureSqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure_SQLDB_CDC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Fruit_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UnitPrice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalPrice",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Fruits"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
