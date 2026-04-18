@@ -258,7 +258,7 @@
 									]
 								},
 								{
-									"name": "Stored procedure1",
+									"name": "SuccessStoredProcedure",
 									"type": "SqlServerStoredProcedure",
 									"dependsOn": [
 										{
@@ -285,6 +285,57 @@
 											},
 											"err": {
 												"value": "'Hello'",
+												"type": "String"
+											},
+											"filename": {
+												"value": {
+													"value": "@item().name",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"pipelinerunid": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "Azure_SQLDB_CDC",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "FailedSuccessStoredProcedure",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "CopyDataToParquet",
+											"dependencyConditions": [
+												"Failed"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[update_batch_files_logged]",
+										"storedProcedureParameters": {
+											"check": {
+												"value": "0",
+												"type": "Int32"
+											},
+											"err": {
+												"value": "\"Failed_Error\"",
 												"type": "String"
 											},
 											"filename": {
