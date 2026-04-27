@@ -1,0 +1,74 @@
+{
+	"name": "Azure_SQL_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure_SQLDB_CDC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "index_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Brand",
+				"type": "varchar"
+			},
+			{
+				"name": "Category",
+				"type": "varchar"
+			},
+			{
+				"name": "Price",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Curreny",
+				"type": "varchar"
+			},
+			{
+				"name": "Stock",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EAN",
+				"type": "varchar"
+			},
+			{
+				"name": "Color",
+				"type": "varchar"
+			},
+			{
+				"name": "Size",
+				"type": "varchar"
+			},
+			{
+				"name": "Availability",
+				"type": "varchar"
+			},
+			{
+				"name": "Internal_ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "products_table"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

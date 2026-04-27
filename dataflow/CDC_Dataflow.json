@@ -1,0 +1,59 @@
+{
+	"name": "CDC_Dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CDC_Source_Table",
+						"type": "DatasetReference"
+					},
+					"name": "AzureCDCSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "CDC_Sink_Table",
+						"type": "DatasetReference"
+					},
+					"name": "AzureCDCDestination"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeeID as integer,",
+				"          EmployeeName as string,",
+				"          Salary as integer,",
+				"          City as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     enableNativeCdc: true,",
+				"     netChanges: true,",
+				"     skipInitialLoad: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> AzureCDCSource",
+				"AzureCDCSource sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EmployeeID as integer,",
+				"          EmployeeName as string,",
+				"          Salary as integer,",
+				"          City as string",
+				"     ),",
+				"     deletable:true,",
+				"     insertable:true,",
+				"     updateable:true,",
+				"     upsertable:true,",
+				"     keys:['EmployeeID'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> AzureCDCDestination"
+			]
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"name": "trigger_source",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyCSVFilesToDestinationParaquet",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/source/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/12123c71-7bb7-415d-b767-a1a507ab272f/resourceGroups/Azure_DE/providers/Microsoft.Storage/storageAccounts/likhithazurestorage",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

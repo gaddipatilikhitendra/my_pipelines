@@ -1,0 +1,236 @@
+{
+	"name": "CopyMissedFilesToDestination",
+	"properties": {
+		"activities": [
+			{
+				"name": "GetSourceFiles",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "source_dataset",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "GetDestinationFiles",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "destination_dataset",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "set_source_length",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "GetSourceFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "source_length",
+					"value": {
+						"value": "@length(activity('GetSourceFiles').output.childItems)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "set_destination_length",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "GetDestinationFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "destination_length",
+					"value": {
+						"value": "@length(activity('GetDestinationFiles').output.childItems)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "CompareSourceToDestination",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "set_difference",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('difference'),0)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "FilteringMissedFiles",
+							"type": "Filter",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"items": {
+									"value": "@activity('GetSourceFiles').output.childItems",
+									"type": "Expression"
+								},
+								"condition": {
+									"value": "@not(contains(activity('GetDestinationFiles').output.childItems,item()))",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Execute_Pipeline",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "FilteringMissedFiles",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "CopyMissedFiles",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"MissedList": {
+										"value": "@activity('FilteringMissedFiles').output.value",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 10
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "set_difference",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "set_source_length",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "set_destination_length",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "difference",
+					"value": {
+						"value": "@sub(variables('source_length'),variables('destination_length'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"source_length": {
+				"type": "Integer"
+			},
+			"destination_length": {
+				"type": "Integer"
+			},
+			"difference": {
+				"type": "Integer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-04-01T09:06:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

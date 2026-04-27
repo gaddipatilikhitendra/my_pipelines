@@ -1,0 +1,17 @@
+{
+	"name": "sqltable_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_Linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "People"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
