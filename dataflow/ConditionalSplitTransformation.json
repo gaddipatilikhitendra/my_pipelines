@@ -1,0 +1,64 @@
+{
+	"name": "ConditionalSplitTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedTextForPivot",
+						"type": "DatasetReference"
+					},
+					"name": "SourceData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SinkSplit",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "SinkSplit",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SplitBased"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmpID as integer,",
+				"          EmpName as string,",
+				"          Age as integer,",
+				"          City as string,",
+				"          Salary as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceData",
+				"SourceData split(equals(City,'Hyderabad'),",
+				"     disjoint: false) ~> SplitBased@(HydData, ChennaiData)",
+				"SplitBased@HydData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['HydData.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1",
+				"SplitBased@ChennaiData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['ChennaiData.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink2"
+			]
+		}
+	}
+}
