@@ -1,0 +1,54 @@
+{
+	"name": "Pivot_Dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedTextForPivot",
+						"type": "DatasetReference"
+					},
+					"name": "SourceData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedPivotedData",
+						"type": "DatasetReference"
+					},
+					"name": "SinkPivotData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "PivotData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmpID as integer,",
+				"          EmpName as string,",
+				"          Age as integer,",
+				"          City as string,",
+				"          Salary as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SourceData",
+				"SourceData pivot(groupBy(City),",
+				"     pivotBy(Age),",
+				"     {} = count(EmpID),",
+				"     columnNaming: '$V$N',",
+				"     lateral: true) ~> PivotData",
+				"PivotData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['pivoted-employees.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> SinkPivotData"
+			]
+		}
+	}
+}
